@@ -113,9 +113,9 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        {{-- <div class="mt-3">
             {{ $students->links() }}
-        </div>
+        </div> --}}
     </section>
 </main>
 @endsection

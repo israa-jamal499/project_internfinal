@@ -33,8 +33,9 @@ use App\Http\Controllers\Cms\Supervisor\StudentController as SupervisorStudentCo
 use App\Http\Controllers\Cms\Admin\CertificateController;
 use App\Http\Controllers\Front\StudentMessageController;
 use App\Http\Controllers\Cms\Supervisor\MessageController;
+
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Cms\Admin\ReportController;
+use App\Http\Controllers\Cms\Admin\ReportController as AdminReportController ;
 
 
 Route::get('/', function () {
@@ -73,7 +74,7 @@ Route::resource('companies', CompanyController::class);
     Route::get('/profile/edit', [AdminController::class, 'editProfile'])->name('profile.edit');
 Route::put('/profile/update', [AdminController::class, 'updateProfile'])->name('profile.update');
 
-    Route::get('/reports', [ReportController::class, 'index'])->name('cms.admin.report');
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('cms.admin.report');
 
     Route::get('/certificates', [CertificateController::class, 'index'])->name('admin.certificates.index');
 Route::post('/certificates/store', [CertificateController::class, 'store'])->name('admin.certificates.store');
@@ -210,6 +211,7 @@ Route::prefix('cms/company')->group(function () {
 Route::post('opportunities/restore/{id}', [OpportunityController::class, 'restore'])->name('opportunities.restore');
 Route::post('opportunities/force-all', [OpportunityController::class, 'forceAll'])->name('opportunities.forceAll');
 Route::delete('opportunities/force/{id}', [OpportunityController::class, 'force'])->name('opportunities.force');
+
 Route::resource('opportunities', OpportunityController::class);
 
     Route::view('/parent', 'cms.company.parent')->name('parent');
@@ -247,7 +249,6 @@ Route::get('/change-password', [CompanyHomeController::class, 'editPassword'])->
 Route::put('/change-password', [CompanyHomeController::class, 'updatePassword'])->name('password.update');
 
    Route::get('/profileintern/{id}', [InternshipController::class, 'show'])->name('cms.company.internsprofile');
-
 
 
 

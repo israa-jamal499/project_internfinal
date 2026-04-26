@@ -62,7 +62,7 @@ class InternshipController extends Controller
             'companies_id' => 'required|exists:companies,id',
             'supervisors_id' => 'nullable|exists:supervisors,id',
             'opportunities_id' => 'required|exists:opportunities,id',
-            'applications_id' => 'nullable|exists:applications,id',
+            // 'applications_id' => 'nullable|exists:applications,id',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'status' => 'required|in:قيد التدريب,مكتمل,متوقف',
@@ -85,7 +85,7 @@ class InternshipController extends Controller
         $internship->companies_id = $request->companies_id;
         $internship->supervisors_id = $request->supervisors_id;
         $internship->opportunities_id = $request->opportunities_id;
-        $internship->applications_id = $request->applications_id;
+        // $internship->applications_id = $request->applications_id;
         $internship->start_date = $request->start_date;
         $internship->end_date = $request->end_date;
         $internship->status = $request->status;

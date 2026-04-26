@@ -214,7 +214,7 @@ body {
                 <a href="{{ route('admin.internships.index') }}" class="nav-link text-white">التدريب</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.reports') }}" class="nav-link text-white">التقارير</a>
+                <a href="{{ route('admin.cms.admin.report') }}" class="nav-link text-white">التقارير</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('admin.admin.certificates.index') }}" class="nav-link text-white">الشهادات</a>
@@ -248,7 +248,7 @@ body {
             </li>
 
             <!-- Messages Dropdown -->
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
                     <span class="badge-danger navbar-badge">{{ $unreadAdminMessagesCount }}</span>
@@ -290,7 +290,7 @@ body {
 
     <a href="#" class="dropdown-item dropdown-footer">عرض كل الرسائل</a>
 </div>
-            </li>
+            </li> --}}
 
             <!-- Notifications Dropdown -->
             <li class="nav-item dropdown">
@@ -563,7 +563,7 @@ body {
 
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports') }}" class="nav-link {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+                        <a href="{{ route('admin.cms.admin.report') }}" class="nav-link {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>التقارير</p>
                         </a>

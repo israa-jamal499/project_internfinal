@@ -89,7 +89,7 @@
           <a class="qa" href="{{ route('admin.companies.index') }}">إدارة الشركات</a>
           <a class="qa" href="{{ route('admin.opportunities.index') }}">إدارة الفرص</a>
           <a class="qa" href="{{ route('admin.internships.index') }}">ملفات التدريب</a>
-          <a class="qa" href="{{ route('admin.reports') }}">التقارير</a>
+          <a class="qa" href="{{ route('admin.cms.admin.report') }}">التقارير</a>
           <a class="qa" href="{{ route('admin.notifications') }}">الإشعارات</a>
         </div>
       </div>

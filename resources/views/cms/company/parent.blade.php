@@ -219,6 +219,10 @@ body {
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('notifications') }}" class="nav-link text-white">الإشعارات</a>
             </li>
+
+
+
+
         </ul>
 
         <ul class="navbar-nav ml-auto">

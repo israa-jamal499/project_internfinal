@@ -359,35 +359,4 @@
     </section>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true" dir="rtl">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title" id="reportModalLabel">تفاصيل التقرير</h5>
-                <button type="button" class="close ml-0 mr-auto text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <p><strong>اسم التقرير:</strong> تقرير متابعة تدريب الطالب أحمد</p>
-                <p><strong>النوع:</strong> تقارير الطلاب</p>
-                <p><strong>الجهة:</strong> شركة المستقبل</p>
-                <p><strong>تاريخ الإنشاء:</strong> 2026-04-07</p>
-                <p><strong>الحالة:</strong> مكتمل</p>
-                <hr>
-                <p>
-                    هذا مثال على محتوى التقرير. هون لاحقًا بتقدري تعرضي نص التقرير كامل،
-                    أو ملخص، أو بيانات جاية من قاعدة البيانات.
-                </p>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                <button type="button" class="btn btn-primary">تنزيل التقرير</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

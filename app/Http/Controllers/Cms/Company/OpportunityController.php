@@ -55,7 +55,7 @@ class OpportunityController extends Controller
             ], 400);
         }
 
-        $company = Auth::user()->company;
+        $company = auth::user()->company;
 
         $opportunity = new Opportunity();
         $opportunity->title = $request->title;

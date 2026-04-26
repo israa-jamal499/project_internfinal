@@ -71,7 +71,7 @@
 
             <div class="form-group col-md-12 mb-3">
                 <label>التخصصات</label>
-                <select id="specializations" class="form-control" multiple>
+                <select id="specializations" class="form-control">
                     @foreach($specializations as $specialization)
                         <option value="{{ $specialization->id }}">{{ $specialization->name }}</option>
                     @endforeach

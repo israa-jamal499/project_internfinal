@@ -61,7 +61,7 @@
 
             <div class="form-group col-md-12 mb-3">
                 <label>التخصصات</label>
-                <select id="specializations" class="form-control" multiple>
+                <select id="specializations" class="form-control">
                     @foreach($specializations as $specialization)
                         <option value="{{ $specialization->id }}"
                             {{ $opportunity->specializations->contains($specialization->id) ? 'selected' : '' }}>
@@ -111,14 +111,14 @@
             </div>
         @endif
 
-        <div class="form-group mb-3">
+        {{-- <div class="form-group mb-3">
             <label>رفع صورة جديدة</label>
             <input type="file" id="image" class="form-control" accept="image/*">
         </div>
 
         <button type="button" onclick="uploadOpportunityImage()" class="btn btn-primary">
             رفع الصورة
-        </button>
+        </button> --}}
     </div>
 </div>
 @endsection
@@ -142,7 +142,7 @@
             specializations: specializations,
         };
 
-        update('{{ route('opportunities.update', $opportunity->id) }}', data, '{{ route('opportunities.index') }}');
+       update('{{ route('opportunities.update', $opportunity->id) }}', data, '{{ route('opportunities.index') }}');
     }
 
     function uploadOpportunityImage() {

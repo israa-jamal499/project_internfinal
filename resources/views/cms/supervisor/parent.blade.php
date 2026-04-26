@@ -247,84 +247,109 @@ body {
                 </div>
             </li>
 
-            <!-- Messages Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link text-white" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments"></i>
-                    <span class=" badge-danger navbar-badge">3</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right text-right" dir="rtl">
-                    <span class="dropdown-item dropdown-header">3 رسائل</span>
-                    <div class="dropdown-divider"></div>
+{{-- Messages Dropdown --}}
+<li class="nav-item dropdown">
+    <a class="nav-link text-white" data-toggle="dropdown" href="#">
+        <i class="far fa-comments"></i>
+        <span class="badge-danger navbar-badge">{{ $unreadMessagesCount ?? 0 }}</span>
+    </a>
 
-                    <a href="#" class="dropdown-item">
-                        <div class="media">
-                            <img src="{{ asset('cms/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle ml-3">
-                            <div class="media-body text-right">
-                                <h3 class="dropdown-item-title">
-                                    أحمد محمد
-                                    <span class="float-left text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">يرجى مراجعة طلب التدريب...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock ml-1"></i> قبل 4 ساعات</p>
-                            </div>
-                        </div>
-                    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right text-right" dir="rtl">
+        <span class="dropdown-item dropdown-header">{{ ($navMessages ?? collect())->count() }} رسائل</span>
+        <div class="dropdown-divider"></div>
 
-                    <div class="dropdown-divider"></div>
+        @forelse(($navMessages ?? collect()) as $message)
+            @php
+                $senderName = optional(optional($message->sender)->student)->full_name
+                    ?? optional(optional($message->sender)->company)->name
+                    ?? optional(optional($message->sender)->supervisor)->full_name
+                    ?? 'مستخدم';
+            @endphp
 
-                    <a href="#" class="dropdown-item">
-                        <div class="media">
-                            <img src="{{ asset('cms/dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle ml-3">
-                            <div class="media-body text-right">
-                                <h3 class="dropdown-item-title">
-                                    شركة المستقبل
-                                    <span class="float-left text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">تم استلام طلبكم</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock ml-1"></i> قبل 4 ساعات</p>
-                            </div>
-                        </div>
-                    </a>
+            <a href="{{ route('cms.supervisor.messages.show', $message->id) }}" class="dropdown-item">
+                <div class="media">
+                    <img src="{{ asset('cms/dist/img/user1-128x128.jpg') }}"
+                         alt="User Avatar"
+                         class="img-size-50 img-circle ml-3">
 
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">عرض كل الرسائل</a>
+                    <div class="media-body text-right">
+                        <h3 class="dropdown-item-title">
+                            {{ $senderName }}
+
+                            @if(!$message->is_read)
+                                <span class="float-left text-sm text-danger">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            @endif
+                        </h3>
+
+                        <p class="text-sm">
+                            {{ \Illuminate\Support\Str::limit($message->body ?? '', 35) }}
+                        </p>
+
+                        <p class="text-sm text-muted">
+                            <i class="far fa-clock ml-1"></i>
+                            {{ optional($message->created_at)->diffForHumans() }}
+                        </p>
+                    </div>
                 </div>
-            </li>
+            </a>
 
-            <!-- Notifications Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link text-white" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class=" badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right text-right" dir="rtl">
-                    <span class="dropdown-item dropdown-header">15 إشعار</span>
-                    <div class="dropdown-divider"></div>
+            <div class="dropdown-divider"></div>
+        @empty
+            <span class="dropdown-item text-center">لا توجد رسائل</span>
+            <div class="dropdown-divider"></div>
+        @endforelse
 
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope ml-2"></i> 4 رسائل جديدة
-                        <span class="float-left text-muted text-sm">3 دقائق</span>
-                    </a>
+        <a href="{{ route('cms.supervisor.messages') }}" class="dropdown-item dropdown-footer">
+            عرض كل الرسائل
+        </a>
+    </div>
+</li>
 
-                    <div class="dropdown-divider"></div>
 
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users ml-2"></i> 8 طلبات جديدة
-                        <span class="float-left text-muted text-sm">12 ساعة</span>
-                    </a>
+{{-- Notifications Dropdown --}}
+<li class="nav-item dropdown">
+    <a class="nav-link text-white" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        <span class=" badge-warning navbar-badge">{{ $unreadNotificationsCount ?? 0 }}</span>
+    </a>
 
-                    <div class="dropdown-divider"></div>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right text-right" dir="rtl">
+        <span class="dropdown-item dropdown-header">{{ ($navNotifications ?? collect())->count() }} إشعار</span>
+        <div class="dropdown-divider"></div>
 
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file ml-2"></i> 3 تقارير جديدة
-                        <span class="float-left text-muted text-sm">يومان</span>
-                    </a>
+        @forelse(($navNotifications ?? collect()) as $notification)
+            <a href="#"
+               class="dropdown-item"
+               onclick="event.preventDefault(); document.getElementById('read-notification-{{ $notification->id }}').submit();">
 
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">عرض كل الإشعارات</a>
-                </div>
-            </li>
+                <i class="fas fa-bell ml-2"></i>
+                {{ $notification->title ?? '' }}
+
+                <span class="float-left text-muted text-sm">
+                    {{ optional($notification->created_at)->diffForHumans() }}
+                </span>
+            </a>
+
+            <form id="read-notification-{{ $notification->id }}"
+                  action="{{ route('notifications.read', $notification->id) }}"
+                  method="POST"
+                  style="display:none;">
+                @csrf
+            </form>
+
+            <div class="dropdown-divider"></div>
+        @empty
+            <span class="dropdown-item text-center">لا توجد إشعارات</span>
+            <div class="dropdown-divider"></div>
+        @endforelse
+
+        <a href="{{ route('cms.supervisor.notifications') }}" class="dropdown-item dropdown-footer">
+            عرض كل الإشعارات
+        </a>
+    </div>
+</li>
 
             <li class="nav-item">
                 <a class="nav-link text-white" data-widget="fullscreen" href="#" role="button">

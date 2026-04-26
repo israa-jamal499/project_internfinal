@@ -80,23 +80,23 @@ public function update(Request $request, $id)
     if ($isUpdated && $request->status == 'مقبول') {
         $internshipExists = Internship::where('applications_id', $application->id)->exists();
 
-        if (!$internshipExists) {
-            Internship::create([
-                'start_date' => now()->toDateString(),
-                'end_date' => null,
-                'status' => 'قيد التدريب',
-                'required_hours' => $application->opportunity->required_hours ?? 0,
-                'completed_hours' => 0,
-                'total_hours' => 0,
-                'notes' => null,
-                'tasks' => null,
-                'students_id' => $application->students_id,
-                'companies_id' => $application->opportunity->companies_id,
-                'supervisors_id' => null,
-                'opportunities_id' => $application->opportunities_id,
-                'applications_id' => $application->id,
-            ]);
-        }
+if (!$internshipExists) {
+    Internship::create([
+        'start_date' => now()->toDateString(),
+        'end_date' => null,
+        'status' => 'قيد التدريب',
+        'required_hours' => $application->opportunity->required_hours ?? 0,
+        'completed_hours' => 0,
+        'total_hours' => 0,
+        'notes' => null,
+        'tasks' => null,
+        'students_id' => $application->students_id,
+        'companies_id' => $application->opportunity->companies_id,
+        'supervisors_id' => null,
+        'opportunities_id' => $application->opportunities_id,
+        'applications_id' => $application->id,
+    ]);
+}
     }
 
     if ($isUpdated) {
@@ -114,14 +114,7 @@ public function update(Request $request, $id)
             'user_id' => $application->student->user_id,
         ]);
     }
-    Notification::create([
-    'title' => 'انتهاء تدريب',
-    'body' => 'انتهى تدريب أحد الطلاب، يرجى إضافة التقييم.',
-    'type' => 'internship',
-    'is_read' => false,
-    'read_at' => null,
-    'user_id' => $internship->company->user_id,
-]);
+
     return response()->json([
         'icon' => $isUpdated ? 'success' : 'error',
         'title' => $isUpdated ? 'Application updated successfully' : 'Update failed',

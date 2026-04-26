@@ -127,4 +127,45 @@ class AppServiceProvider extends ServiceProvider
         'unreadNotificationsCount'
     ));
 });
+
+View::composer(['cms.supervisor.*'], function ($view) {
+    $user = Auth::user();
+
+    $navMessages = collect();
+    $navNotifications = collect();
+    $unreadMessagesCount = 0;
+    $unreadNotificationsCount = 0;
+
+    if ($user) {
+        $navMessages = Message::with([
+                'sender.student',
+                'sender.company',
+                'sender.supervisor'
+            ])
+            ->where('receiver_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $unreadMessagesCount = Message::where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->count();
+
+        $navNotifications = Notification::where('user_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $unreadNotificationsCount = Notification::where('user_id', $user->id)
+            ->where('is_read', false)
+            ->count();
+    }
+
+    $view->with(compact(
+        'navMessages',
+        'navNotifications',
+        'unreadMessagesCount',
+        'unreadNotificationsCount'
+    ));
+});
 }}
