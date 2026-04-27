@@ -49,11 +49,12 @@ class OpportunityController extends Controller
             'specializations.*' => 'exists:specializations,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+          if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $company = auth::user()->company;
 
@@ -128,12 +129,12 @@ class OpportunityController extends Controller
             'specializations.*' => 'exists:specializations,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
-
+          if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
         $opportunity->title = $request->title;
         $opportunity->description = $request->description;
         $opportunity->type = $request->type;
