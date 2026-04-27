@@ -42,11 +42,12 @@ class CompanyController extends Controller
             'city_id' => 'required|exists:cities,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $user = new User();
         $user->email = $request->email;
@@ -110,11 +111,12 @@ class CompanyController extends Controller
             'city_id' => 'required|exists:cities,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $company->user->email = $request->email;
         $company->user->save();

@@ -51,11 +51,12 @@ class StudentController extends Controller
             'specialization_id' => 'nullable|exists:specializations,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $user = new User();
         $user->email = $request->email;
@@ -130,10 +131,11 @@ class StudentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $student->user->email = $request->email;
         $student->user->save();

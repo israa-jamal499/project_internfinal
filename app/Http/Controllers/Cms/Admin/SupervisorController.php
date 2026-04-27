@@ -43,11 +43,12 @@ class SupervisorController extends Controller
             'college_id' => 'nullable|exists:colleges,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $user = new User();
         $user->email = $request->email;
@@ -108,11 +109,12 @@ class SupervisorController extends Controller
             'college_id' => 'nullable|exists:colleges,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 400);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         $supervisor->user->email = $request->email;
         $supervisor->user->status = $request->status;

@@ -20,11 +20,12 @@ class ImageController extends Controller
             'id' => 'required|integer',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all(),
-            ], 422);
-        }
+         if ($validator->fails()) {
+        return response()->json([
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
+        ], 400);
+    }
 
         if ($request->type == 'student') {
             $model = Student::findOrFail($request->id);

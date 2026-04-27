@@ -65,9 +65,10 @@ public function update(Request $request, $id)
         'admin_notes' => 'nullable|string',
     ]);
 
-    if ($validator->fails()) {
+     if ($validator->fails()) {
         return response()->json([
-            'errors' => $validator->errors()->all(),
+            'icon'  => 'error',
+            'title' => $validator->getMessageBag()->first(),
         ], 400);
     }
 

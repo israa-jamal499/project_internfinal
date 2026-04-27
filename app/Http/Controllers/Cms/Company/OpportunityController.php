@@ -49,7 +49,7 @@ class OpportunityController extends Controller
             'specializations.*' => 'exists:specializations,id',
         ]);
 
-          if ($validator->fails()) {
+        if ($validator->fails()) {
         return response()->json([
             'icon'  => 'error',
             'title' => $validator->getMessageBag()->first(),
